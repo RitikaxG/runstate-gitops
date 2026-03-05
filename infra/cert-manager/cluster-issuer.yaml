@@ -1,0 +1,19 @@
+# Defines a ClusterIssuer for cert-manager that tells Kubernetes 
+# how to obtain SSL/TLS certificates from Let’s Encrypt.
+apiVersion: cert-manager.io/v1 # Since we installed CRDs , K8 now understands cert-manager.io/v1
+kind: ClusterIssuer # Type of Resource
+metadata:
+  name: letsencrypt-prod # Gives Resource a name
+spec: # Defines how certificate should be issued
+  acme: # Automatic Certificate Management Environment. 
+  # It is the protocol used by Let’s Encrypt to issue certificates automatically. 
+  # cert-manager acts as an ACME client inside Kubernetes.
+    email: ritikaxg@gmail.com
+    server:  https://acme-v02.api.letsencrypt.org/directory # Defines acme server endpoint
+    privateKeySecretRef:  # Let’s Encrypt requires an account private key.
+    # cert-manager stores it inside Kubernetes as a Secret.
+      name: letsencrypt-prod
+    solvers: # Defines how Let's Encrypt verifies domain ownership.
+      - http01: # create temporary HTTP endpoint
+          ingress:
+            class: nginx # Use the NGINX ingress controller to expose the challenge endpoint.

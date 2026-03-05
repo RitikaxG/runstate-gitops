@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-status-change
+  namespace: runstate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-status-change
+  template:
+    metadata:
+      labels:
+        app: worker-status-change
+    spec:
+      containers:
+        - name: worker-status-change
+          image: ghcr.io/ritikaxg/runstate-api-go:sha-6d1f075
+          command: ["/worker-status-change"]
+          envFrom:
+            - configMapRef:
+                name: runstate-config
+            - secretRef:
+                name: runstate-secret
+  

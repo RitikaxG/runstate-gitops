@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-pusher
+  namespace: runstate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:  
+      app: monitoring-pusher
+  template:
+    metadata:
+      labels:
+        app: monitoring-pusher
+    spec:
+      containers:
+        - name: monitoring-pusher
+          image: ghcr.io/ritikaxg/runstate-api-go:sha-6d1f075
+          command: ["/monitoring-pusher"]
+          envFrom:
+            - configMapRef:
+                name: runstate-config
+            - secretRef:
+                name:  runstate-secret

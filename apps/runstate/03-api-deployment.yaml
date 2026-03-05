@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: runstate-api
+  namespace: runstate
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: runstate-api
+  template:
+    metadata:
+      labels:
+        app: runstate-api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/ritikaxg/runstate-api-go:sha-6d1f075
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - configMapRef: 
+                name: runstate-config
+            - secretRef:
+                name: runstate-secret
+          readinessProbe: # checks if pod is ready
+            httpGet:
+              path: /api/v1/health
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:  # checks if container is still alive
+            httpGet:
+              path: /api/v1/health
+              port: 3001
+            initialDelaySeconds: 15
+            periodSeconds: 20

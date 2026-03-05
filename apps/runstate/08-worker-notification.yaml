@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-notification
+  namespace: runstate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:  
+      app: worker-notification
+  template:
+    metadata:
+      labels:
+        app: worker-notification
+    spec:
+      containers: 
+        - name: worker-notification
+          image: ghcr.io/ritikaxg/runstate-api-go:sha-6d1f075
+          command: ["/worker-notification"]
+          envFrom:
+            - configMapRef:
+                name: runstate-config
+            - secretRef:
+                name: runstate-secret
