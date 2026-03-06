@@ -21,4 +21,4 @@ spec:
             - configMapRef:
                 name: runstate-config
             - secretRef:
-                name:  runstate-secret
+                name:  runstate-app-secret

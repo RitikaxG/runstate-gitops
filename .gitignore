@@ -3,3 +3,11 @@
 *.env
 *.pem
 *.key
+apps/runstate/02-secret.yaml
+
+# # ArgoCD deploy keys
+argocd_runstate_gitops
+argocd_runstate_gitops.pub
+
+# # repo credentials
+infra/argocd/repo-cred-secret.yaml
