@@ -3,7 +3,7 @@
 *.env
 *.pem
 *.key
-apps/runstate/02-secret.yaml
+
 
 # # ArgoCD deploy keys
 argocd_runstate_gitops

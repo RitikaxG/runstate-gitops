@@ -1,0 +1,28 @@
+# ArgoCD Application Manifest
+# It defines : 1. where to get manifest from 2. where to deploy them 3. How to keep them in sync
+# Tells ArgoCD to install and manage the NGINX Ingress Controller using Helm inside your Kubernetes cluster
+# Ingress Controller must exist before apps create ingress resource
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0" # Controls deployment order in Gitops, this ensures ingress installs first
+spec:
+  project: default
+  destination: # deploy application to current cluster `ingress-nginx` namespace
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx
+  source: # What to install
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.12.0
+    helm:
+      releaseName: ingress-nginx
+  syncPolicy: # Enables Gitops automation
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

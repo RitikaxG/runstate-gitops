@@ -1,0 +1,11 @@
+resources:
+  - 00-namespace.yaml
+  - 01-configmap.yaml
+  - 02-externalsecret.yaml
+  - 03-api-deployment.yaml
+  - 04-api-service.yaml
+  - 05-monitoring-pusher.yaml
+  - 06-worker-monitoring.yaml
+  - 07-worker-status-change.yaml
+  - 08-worker-notification.yaml
+  - 09-ingress.yaml

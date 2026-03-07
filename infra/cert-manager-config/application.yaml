@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-config
+  namespace: argocd
+  annotations:
+    - argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  destination:  
+    server: http://kubernetes.default.svc
+    namespace: cert-manager
+  source:
+    repoURL: git@github.com:RitikaxG/runstate-gitops.git
+    targetRevision: main
+    path: infra/cert-manager-config
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

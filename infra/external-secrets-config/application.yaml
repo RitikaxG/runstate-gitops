@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-secrets-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-secrets
+  source:
+    repoURL: git@github.com:RitikaxG/runstate-gitops.git
+    targetRevision: main
+    path: infra/external-secrets-config
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
