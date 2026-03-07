@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-secrets-config
+  name: runstate
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    namespace: runstate
   source:
     repoURL: git@github.com:RitikaxG/runstate-gitops.git
     targetRevision: main
-    path: infra/external-secrets-config
+    path: apps/runstate
   syncPolicy:
     automated:
       prune: true

@@ -4,11 +4,11 @@ metadata:
   name: cert-manager-config
   namespace: argocd
   annotations:
-    - argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  destination:  
-    server: http://kubernetes.default.svc
+  destination:
+    server: https://kubernetes.default.svc
     namespace: cert-manager
   source:
     repoURL: git@github.com:RitikaxG/runstate-gitops.git
