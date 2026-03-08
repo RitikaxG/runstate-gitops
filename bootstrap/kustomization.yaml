@@ -8,4 +8,4 @@ resources:
   - external-secrets-app.yaml
   - external-secrets-config-app.yaml
   - runstate-app.yaml
-  
+  - argocd-config-app.yaml
