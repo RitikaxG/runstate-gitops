@@ -8,4 +8,4 @@ resources:
   - 06-worker-monitoring.yaml
   - 07-worker-status-change.yaml
   - 08-worker-notification.yaml
-  - 09-ingress.yaml
+  - 09-api-ingress.yaml
