@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - kube-prometheus-stack-app.yaml
   - grafana-ingress.yaml
-  - monitoring-app.yaml
