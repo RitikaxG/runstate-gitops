@@ -1,0 +1,21 @@
+# First install CRDs for kube-prometheus-stack 
+apiVersion: argoproj.io/v1aplha1
+kind: Application
+metadata:
+  name: kube-prometheus-crds
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  source:
+    repoURL: https://github.com/prometheus-operator/prometheus-operator
+    targeRevision: v0.87.0
+    path: example/prometheus-operator-crd
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true

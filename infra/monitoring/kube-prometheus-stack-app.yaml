@@ -5,7 +5,7 @@ metadata:
   name: kube-prometheus-stack
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "6"
+    argocd.argoproj.io/sync-wave: "7"
 spec:
   project: default
   destination:
@@ -17,7 +17,9 @@ spec:
     targetRevision: 80.13.3
     helm: 
       releaseName: kube-prometheus-stack
+      skipCrds: true
       values: |
+
         grafana:
           adminPassword: runstate-grafana 
 
