@@ -9,3 +9,4 @@ resources:
   - external-secrets-config-app.yaml
   - runstate-app.yaml
   - argocd-config-app.yaml
+  - monitoring-app.yaml

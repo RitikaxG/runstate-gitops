@@ -1,0 +1,33 @@
+# ArgoCD App for kube prometheus stack
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 80.13.3
+    helm: 
+      releaseName: kube-prometheus-stack
+      values: |
+        grafana:
+          adminPassword: runstate-grafana 
+
+        prometheus:
+          prometheusSpec: 
+            serviceMonitorSelectorNilUsesHelmValues: false
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

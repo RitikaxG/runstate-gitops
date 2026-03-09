@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring-config
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  source: 
+    repoURL: git@github.com:RitikaxG/runstate-gitops.git
+    targetRevision: main
+    path: infra/monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
