@@ -5,3 +5,4 @@ resources:
   - kube-prometheus-crds-app.yaml
   - kube-prometheus-stack-app.yaml
   - grafana-ingress.yaml
+  - runstate-api-servicemonitor.yaml
