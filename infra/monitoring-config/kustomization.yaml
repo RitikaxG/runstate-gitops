@@ -2,7 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - kube-prometheus-crds-app.yaml
-  - kube-prometheus-stack-app.yaml
   - grafana-ingress.yaml
   - runstate-api-servicemonitor.yaml

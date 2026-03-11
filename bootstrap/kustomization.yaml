@@ -9,4 +9,6 @@ resources:
   - external-secrets-config-app.yaml
   - runstate-app.yaml
   - argocd-config-app.yaml
-  - monitoring-app.yaml
+  - monitoring-crds-app.yaml
+  - monitoring-stack-app.yaml
+  - monitoring-config-app.yaml
