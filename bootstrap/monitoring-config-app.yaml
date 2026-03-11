@@ -13,7 +13,7 @@ spec:
   source: 
     repoURL: git@github.com:RitikaxG/runstate-gitops.git
     targetRevision: main
-    path: infra/monitoring
+    path: infra/monitoring-config
   syncPolicy:
     automated:
       prune: true
