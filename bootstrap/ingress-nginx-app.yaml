@@ -20,6 +20,15 @@ spec:
     targetRevision: 4.12.0
     helm:
       releaseName: ingress-nginx
+      values: |
+        controller:
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+              namespace: monitoring
+              additionalLabels:
+                release: kube-prometheus-stack
   syncPolicy: # Enables Gitops automation
     automated:
       prune: true
