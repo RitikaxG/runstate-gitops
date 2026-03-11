@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: worker-monitoring
-          image: ghcr.io/ritikaxg/runstate-api-go:sha-6d1f075
+          image: ghcr.io/ritikaxg/runstate-api-go:sha-c30ea20
           command: ["/worker-monitoring"]
           envFrom:
             - configMapRef:

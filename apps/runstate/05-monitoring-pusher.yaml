@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: monitoring-pusher
-          image: ghcr.io/ritikaxg/runstate-api-go:sha-6d1f075
+          image: ghcr.io/ritikaxg/runstate-api-go:sha-c30ea20
           command: ["/monitoring-pusher"]
           envFrom:
             - configMapRef:
