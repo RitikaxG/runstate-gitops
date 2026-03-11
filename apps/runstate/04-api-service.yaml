@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: runstate-api
   namespace: runstate
+  labels:
+    app: runstate-api
 spec:
   selector:
     app: runstate-api
