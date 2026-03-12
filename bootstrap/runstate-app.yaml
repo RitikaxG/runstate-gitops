@@ -16,7 +16,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: runstate
   source:
-    repoURL: git@github.com:RitikaxG/runstate-gitops.git
+    repoURL: https://github.com/RitikaxG/runstate-gitops.git
     targetRevision: main
     path: apps/runstate
   syncPolicy:
