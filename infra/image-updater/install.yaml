@@ -5,10 +5,9 @@ metadata:
   namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
   name: argocd-image-updater
-  namespace: argocd
 rules:
   - apiGroups: [""]
     resources: ["configmaps", "secrets", "events"]
@@ -21,13 +20,12 @@ rules:
     verbs: ["get", "list", "watch", "update", "patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: argocd-image-updater
-  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: argocd-image-updater
 subjects:
   - kind: ServiceAccount
