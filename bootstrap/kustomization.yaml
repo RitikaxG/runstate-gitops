@@ -12,3 +12,4 @@ resources:
   - monitoring-crds-app.yaml
   - monitoring-stack-app.yaml
   - monitoring-config-app.yaml
+  - cluster-autoscaler-app.yaml
