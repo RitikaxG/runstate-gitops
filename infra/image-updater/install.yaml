@@ -54,6 +54,10 @@ spec:
         - name: argocd-image-updater
           image: quay.io/argoprojlabs/argocd-image-updater:v0.15.2
           imagePullPolicy: IfNotPresent
+          command:
+            - argocd-image-updater
+          args:
+            - run
           env:
             - name: ARGOCD_SERVER
               value: argocd-server.argocd.svc.cluster.local:80
