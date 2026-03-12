@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   destination:
-    server: http://kubernetes.default.svc
+    server: https://kubernetes.default.svc
     namespace: argocd
   source:
     repoURL: git@github.com:RitikaxG/runstate-gitops.git
