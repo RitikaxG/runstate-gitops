@@ -1,13 +1,9 @@
-# Creates K8s Identity called argocd/argocd-image-updater
-# Image Updater Pod will run as the ServiceAccount
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: argocd-image-updater
   namespace: argocd
 ---
-
-# A Role defines what this ServiceAccount is allowed to do inside the argocd namespace.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -15,18 +11,15 @@ metadata:
   namespace: argocd
 rules:
   - apiGroups: [""]
-      resources: ["configmaps", "secrets", "events"]
-      verbs: ["get", "list", "watch"]
+    resources: ["configmaps", "secrets", "events"]
+    verbs: ["get", "list", "watch"]
   - apiGroups: [""]
-      resources: ["events"]
-      verbs: ["create"]
+    resources: ["events"]
+    verbs: ["create"]
   - apiGroups: ["argoproj.io"]
-      resources: ["applications"]
-      verbs: ["get", "list", "watch", "update", "patch"]
-
+    resources: ["applications"]
+    verbs: ["get", "list", "watch", "update", "patch"]
 ---
-
-# RoleBinding connects the role to the service account
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -40,10 +33,7 @@ subjects:
   - kind: ServiceAccount
     name: argocd-image-updater
     namespace: argocd
-
 ---
-
-# It launches one pod running the Image Updater binary.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -62,23 +52,23 @@ spec:
       serviceAccountName: argocd-image-updater
       containers:
         - name: argocd-image-updater
-          image: ghcr.io/argoproj-labs/argocd-image-updater:v0.15.2 # Actual ArgoCD Image Updater container image.
+          image: ghcr.io/argoproj-labs/argocd-image-updater:v0.15.2
           imagePullPolicy: IfNotPresent
-          command: # This starts the updater in normal controller mode.
+          command:
             - /app/argocd-image-updater
             - run
           env:
-            - name: ARGOCD_SERVER # This tells Image Updater how to reach the ArgoCD API service inside the cluster.
+            - name: ARGOCD_SERVER
               value: argocd-server.argocd.svc.cluster.local:80
-            - name: ARGOCD_INSECURE # This tells it to use insecure mode when talking to ArgoCD.
+            - name: ARGOCD_INSECURE
               value: "true"
-            - name: ARGOCD_GRPC_WEB # This enables grpc-web mode for communication with ArgoCD.
+            - name: ARGOCD_GRPC_WEB
               value: "true"
-            - name: GIT_COMMIT_USER # These are used when Image Updater writes changes back to Git.
+            - name: GIT_COMMIT_USER
               value: argocd-image-updater
             - name: GIT_COMMIT_EMAIL
               value: image-updater@runstate.local
-          volumeMounts: # mount a ConfigMap into the container
+          volumeMounts:
             - name: config
               mountPath: /app/config
       volumes:
