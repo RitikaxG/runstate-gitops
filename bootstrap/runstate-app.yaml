@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
     argocd-image-updater.argoproj.io/image-list: api=ghcr.io/ritikaxg/runstate-api
     argocd-image-updater.argoproj.io/api.update-strategy: newest-build
-    argocd-image-updater.argoproj.io/api.allow-tags: regexp:^main-[a-f0-9]+$
+    argocd-image-updater.argoproj.io/api.allow-tags: regexp:^sha-[a-f0-9]+$
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/write-back-target: kustomization
 spec:
