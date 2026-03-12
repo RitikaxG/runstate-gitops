@@ -13,3 +13,4 @@ resources:
   - monitoring-stack-app.yaml
   - monitoring-config-app.yaml
   - cluster-autoscaler-app.yaml
+  - image-updater-app.yaml

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-image-updater
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+spec:
+  project: default
+  destination:
+    server: http://kubernetes.default.svc
+    namespace: argocd
+  source:
+    repoURL: git@github.com:RitikaxG/runstate-gitops.git
+    targetRevision: main
+    path: infra/image-updater
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

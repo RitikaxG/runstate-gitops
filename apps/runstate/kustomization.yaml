@@ -10,3 +10,7 @@ resources:
   - 08-worker-notification.yaml
   - 09-api-ingress.yaml
   - 10-api-hpa.yaml
+
+images:
+  - name: ghcr.io/ritikaxg/runstate-api-go
+    newTag: sha-c30ea20

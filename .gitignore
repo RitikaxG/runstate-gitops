@@ -11,3 +11,4 @@ argocd_runstate_gitops.pub
 
 # # repo credentials
 infra/argocd/repo-cred-secret.yaml
+infra/image-updater/secret.yaml

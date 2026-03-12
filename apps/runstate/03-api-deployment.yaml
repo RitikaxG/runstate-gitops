@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: ghcr.io/ritikaxg/runstate-api-go:sha-c30ea20
+          image: ghcr.io/ritikaxg/runstate-api-go
           ports:
             - containerPort: 3001
 

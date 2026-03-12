@@ -1,0 +1,14 @@
+# ConfigMap configures how ArgoCD Image Updater talks to container registries
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-image-updater-config
+  namespace: argocd
+data:   
+  registries.conf: |
+    registries:   
+      - name: Github Container Registry
+        prefix: ghcr.io
+        api_url: https://ghcr.io
+        credentials: secret:argocd/ghcr-creds#creds 
+        default: true
