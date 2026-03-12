@@ -50,6 +50,8 @@ spec:
         app: argocd-image-updater
     spec:
       serviceAccountName: argocd-image-updater
+      imagePullSecrets:
+        - name: ghcr-pull-secret
       containers:
         - name: argocd-image-updater
           image: ghcr.io/argoproj-labs/argocd-image-updater:v0.15.2
