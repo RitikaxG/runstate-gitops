@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   source:
-    repoURL: git@github.com:RitikaxG/runstate-gitops.git
+    repoURL: https://github.com/RitikaxG/runstate-gitops.git
     targetRevision: main
     path: infra/argocd
   syncPolicy:
