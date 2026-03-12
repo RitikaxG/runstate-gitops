@@ -1,0 +1,38 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: 
+  name: runstate-api # named same as Deployment ( runstate-api )
+  namespace: runstate
+spec:
+  scaleTargetRef: # target deployment
+    apiVersion: apps/v1
+    kind: Deployment
+    name: runstate-api
+  minReplicas: 2
+  maxReplicas: 6
+  behavior: # Controls how fast scaling happens
+    scaleUp:
+      stabilizationWindowSeconds: 0 # when CPU goes above target, scale immediately
+      policies:
+        - type: Percent # In 60s replica count can increase upto 100%
+          value: 100
+          periodSeconds: 60
+        - type: Pods # In 60s cale up by atmost 2 pods
+          value: 2
+          periodSeconds: 60
+      selectPolicy: Max # If multiple policies exist, use the one that allows the largest increase
+    scaleDown:
+      stabilizationWindowSeconds: 300 # When CPU drops, wait for 5 min before scaling down aggressively
+      policies:
+        - type: Percent # In 60s reduce replicas by atmost 50%
+          value: 50
+          periodSeconds: 60
+      selectPolicy: Max
+  metrics: # Defines what signal HPA watches
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization # try to keep average CPU usage at about 70% of requested CPU across all pods
+          averageUtilization: 70
+

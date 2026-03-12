@@ -18,6 +18,15 @@ spec:
           image: ghcr.io/ritikaxg/runstate-api-go:sha-c30ea20
           ports:
             - containerPort: 3001
+
+          resources:
+            requests: # minimum resource K8s guarantees
+              cpu: "100m" # 100 millicpu , each runstate-api pod is guaranteed 0.1 CPU core
+              memory: "128Mi" # Each pod requests 128MB RAM.
+            limits: # maximum resource container is allowed to use
+              cpu: "500m" # container cannot exceed 0.5 CPU core
+              memory: "512Mi" # Pod cannot exceed 512MB RAM.
+
           envFrom:
             - configMapRef: 
                 name: runstate-config

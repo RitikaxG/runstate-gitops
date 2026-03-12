@@ -9,3 +9,4 @@ resources:
   - 07-worker-status-change.yaml
   - 08-worker-notification.yaml
   - 09-api-ingress.yaml
+  - 10-api-hpa.yaml
