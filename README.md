@@ -133,6 +133,7 @@ This screenshot shows proof of DNS resolution or successful domain-based access 
 This screenshot shows the automated GitOps image update flow, where a newly built backend image is detected and the deployment manifests are updated to reflect the new version.
 
 ![Automated Git image update](./images/automated_image_updation.png)
+
 ---
 
 ## Repo structure
